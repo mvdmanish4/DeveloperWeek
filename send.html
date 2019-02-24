@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale = 1.0, maximum-scale = 1.0, user-scalable=no">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<style type="text/css">
+.container-name div {
+    display: inline-block;
+	width: 500px;
+	min-height: 50px;
+	background-color: #eee;
+	height: auto;
+}
+</style>
+</head>
+<body>    
+    <div class="container-name">
+        <div class="div1"><img src="sig1.png" alt="Signature not available"></div>
+		<div class="div2">
+			<form>
+  				Name: <input type="text" name="fname"><br>
+  				Corporate Email: <input type="text" name="lname"><br>  				
+			</form>
+		</div>
+	</div>
+	</br>
+	<div class="container-name">
+        <div class="div1"><img src="sig2.png" alt="Signature not available"></div>
+		<div class="div2">
+			<form>
+  				Name: <input type="text" name="fname"><br>
+  				Corporate Email: <input type="text" name="lname"><br>  				
+			</form>
+		</div>
+	</div>
+    </br>
+    <input id="clickMe" type="button" value="Submit" onclick="generateSignature();" />
+    <div id="pdf-contents">        
+    </div>
+<script>
+function generateSignature() {
+		const Http = new XMLHttpRequest();
+        const url='http://localhost:3000';
+        Http.open("GET", url);
+        Http.send();
+        Http.onreadystatechange=(e)=>{
+        console.log("Mike Testing");	
+        console.log(Http.responseText);
+        var obj = JSON.parse(Http.responseText);
+        console.log(obj.envelopeId);
+        document.getElementById("pdf-contents").innerHTML = "Request successfully sent to the owners.";
+        }
+}
+</script>
+</body>
+</html>
